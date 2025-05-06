@@ -1,0 +1,83 @@
+* {
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #d3d3d3;
+}
+
+main {
+  max-width: 1198px;
+  background-color: #f1f1f7;
+  border-radius: 25px;
+  padding: 35px;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.15);
+  margin: 0 auto;
+  margin-top: 3%;
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+.gallery-item {
+  width: 360px;
+  height: 200px;
+  transition: transform 0.35s ease-out;
+}
+
+.gallery-item:hover,
+.gallery-item:focus {
+  transform: scale(1.05);
+}
+
+.gallery-image {
+  cursor: zoom-in;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.signature-container {
+  position: absolute;
+  top: 90%;
+  left: 50%;
+  transform: rotate(-5deg) translateX(-50%);
+  transition: transform 0.35s ease-out;
+}
+
+.signature-container:hover,
+.signature-container:focus {
+  transform: rotate(-5deg) translateX(-50%) scale(1.05);
+}
+
+.signature-img {
+  display: block;
+  position: absolute;
+  top: -45px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.signature-text {
+  font-family: 'Montserrat', sans-serif;
+  margin-top: 6px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 133%;
+  letter-spacing: 0.04em;
+  color: #2e2f42;
+}
+
+.basicLightbox.basicLightbox--visible {
+  cursor: zoom-out;
+}
