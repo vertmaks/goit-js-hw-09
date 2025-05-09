@@ -41,7 +41,7 @@ main {
 }
 
 .gallery-image {
-  cursor: zoom-in;
+  /* cursor: zoom-in; */
   display: block;
   width: 100%;
   height: 100%;
@@ -77,8 +77,4 @@ main {
   line-height: 133%;
   letter-spacing: 0.04em;
   color: #2e2f42;
-}
-
-.basicLightbox.basicLightbox--visible {
-  cursor: zoom-out;
 }
