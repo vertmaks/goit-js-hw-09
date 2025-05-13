@@ -1,4 +1,4 @@
-import { incorrectEmail, emptyEmail } from './form-errors';
+import { emailErrorMsg, emptyErrorMsg } from './form-errors';
 import { refs } from './refs';
 
 let msgTimeoutId = null;
@@ -9,10 +9,20 @@ export function emailCheck() {
     /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
   );
 
+  const existingError = refs.emailInput.parentElement.querySelector(
+    '.form-email-error-msg'
+  );
+  if (existingError) existingError.remove();
+
   if (refs.emailInput.value === '') {
     refs.emailInput.style.borderColor = 'tomato';
 
-    //   insert emty error to HTML!
+    //   insert empty error to HTML!
+    refs.emailInput.insertAdjacentHTML('afterend', emptyErrorMsg);
+    const emptyMsg = refs.emailInput.parentElement.querySelector(
+      '.form-error-empty-msg'
+    );
+    errorMsg.classList.add('is-onscreen');
 
     // old example
     // emailEmptyError.classList.remove('visually-hidden');
@@ -24,6 +34,8 @@ export function emailCheck() {
       refs.emailInput.style.borderColor = '';
 
       // remove empty error from HTML!
+      emptyMsg.classList.remove('is-onscreen');
+      emptyMsg.remove();
 
       // old example
       //   emailEmptyError.classList.remove('is-onscreen');
@@ -35,6 +47,11 @@ export function emailCheck() {
     refs.emailInput.style.borderColor = 'tomato';
 
     //   insert ivalid email error to HTML
+    refs.emailInput.insertAdjacentHTML('afterend', emailErrorMsg);
+    const errorMsg = refs.emailInput.parentElement.querySelector(
+      '.form-email-error-msg'
+    );
+    errorMsg.classList.add('is-onscreen');
 
     //   old example
     // emailErrorMsg.classList.remove('visually-hidden');
@@ -46,6 +63,8 @@ export function emailCheck() {
       refs.emailInput.style.borderColor = '';
 
       // remove ivalid email error from HTML
+      errorMsg.classList.remove('is-onscreen');
+      errorMsg.remove();
 
       // old example
       //   emailErrorMsg.classList.remove('is-onscreen');
@@ -68,10 +87,20 @@ export function emailCheck() {
 }
 
 export function msgCheck() {
+  const existingError = refs.textInput.parentElement.querySelector(
+    '.form-error-empty-msg'
+  );
+  if (existingError) existingError.remove();
+
   if (refs.textInput.value.trim() === '') {
     refs.textInput.style.borderColor = 'tomato';
 
     //   insert empty HTML error!
+    refs.textInput.insertAdjacentHTML('afterend', emptyErrorMsg);
+    const emptyMsg = refs.textInput.parentElement.querySelector(
+      '.form-error-empty-msg'
+    );
+    emptyMsg.classList.add('is-onscreen');
 
     //   old
     // nameEmptyError.classList.remove('visually-hidden');
@@ -82,6 +111,8 @@ export function msgCheck() {
       refs.textInput.style.borderColor = '';
 
       // remove empty HTML error!
+      emptyMsg.classList.remove('is-onscreen');
+      emptyMsg.remove();
 
       // old
       //   nameEmptyError.classList.remove('is-onscreen');
@@ -89,7 +120,7 @@ export function msgCheck() {
 
     return false;
   } else {
-    refes.textInput.style.borderColor = '';
+    refs.textInput.style.borderColor = '';
 
     //   remove empty HTML error!
 
@@ -100,6 +131,27 @@ export function msgCheck() {
 
     return true;
   }
+}
+
+export function formSubmit(event) {
+  event.preventDefault();
+  const form = event.target;
+  const isMsgFilled = msgCheck();
+  const isEmailValid = emailCheck();
+
+  if (!isEmailValid) {
+    if (refs.emailInput.value === '') {
+      triggerShake(refs.emptyErrorMsg);
+    } else {
+      triggerShake(refs.emailErrorMsg);
+    }
+  }
+
+  if (!isMsgFilled) {
+    triggerShake(refs.emptyErrorMsg);
+  }
+
+  form.reset();
 }
 
 export function triggerShake(el) {
