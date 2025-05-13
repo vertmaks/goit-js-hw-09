@@ -1,1 +1,0 @@
-{"version":3,"file":"2-form-OH7KlVxV.js","sources":["../../src/js/2-form.js"],"sourcesContent":["let refs = {\n  form: document.querySelector('.feedback - form'),\n};\n"],"names":[],"mappings":"AACQ,SAAS,cAAc,kBAAkB"}

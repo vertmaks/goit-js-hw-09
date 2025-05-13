@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Task 2 - Form</title>
     <script type="module" crossorigin src="/goit-js-hw-09/assets/main-DxOmx7x6.js"></script>
-    <script type="module" crossorigin src="/goit-js-hw-09/assets/2-form-OH7KlVxV.js"></script>
+    <script type="module" crossorigin src="/goit-js-hw-09/assets/2-form-C_zVY0DT.js"></script>
     <link rel="stylesheet" crossorigin href="/goit-js-hw-09/assets/main-D2WNEKLo.css">
-    <link rel="stylesheet" crossorigin href="/goit-js-hw-09/assets/2-form-CcwDgydi.css">
+    <link rel="stylesheet" crossorigin href="/goit-js-hw-09/assets/2-form-Bl7m3pRi.css">
   </head>
   <body>
     <a class="nav" href="./index.html">← Go back</a>
@@ -15,11 +15,21 @@
       <form class="feedback-form" autocomplete="off">
         <label>
           Email
-          <input type="email" name="email" autofocus />
+          <div class="position-container">
+            <input
+              id="userEmail"
+              type="email"
+              name="email"
+              autofocus
+              autocomplete="off"
+            />
+          </div>
         </label>
         <label>
           Message
-          <textarea name="message" rows="8"></textarea>
+          <div class="position-container">
+            <textarea id="userMsg" name="message" rows="8"></textarea>
+          </div>
         </label>
         <button type="submit">Submit</button>
       </form>
