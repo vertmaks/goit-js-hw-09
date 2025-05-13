@@ -73,3 +73,31 @@
 .feedback-form button:focus {
   background-color: #6c8cff;
 }
+
+.position-container {
+  position: relative;
+}
+
+.form-email-error-msg,
+.form-email-error-empty,
+.form-text-error-empty {
+  position: absolute;
+  top: -3px;
+  right: 25px;
+  background-color: #fff;
+  color: tomato;
+  font-size: 12px;
+
+  opacity: 0;
+  transform: scale(0);
+
+  transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition-property: opacity, color, transform;
+}
+
+.form-email-error-msg.is-onscreen,
+.form-email-error-empty.is-onscreen,
+.form-text-error-empty.is-onscreen {
+  opacity: 1;
+  transform: scale(1);
+}
