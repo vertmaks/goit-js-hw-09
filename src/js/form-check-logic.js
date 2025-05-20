@@ -1,6 +1,11 @@
 import { emailErrorMsg, emptyErrorMsg } from './form-errors';
 import { refs } from './refs';
 
+const STORAGE_KEY = 'feedback-form-state';
+const form = refs.form;
+const emailInput = refs.emailInput;
+const textInput = refs.textInput;
+
 let msgTimeoutId = null;
 let emailTimeoutId = null;
 let shakeId = null;
@@ -93,11 +98,13 @@ export function msgCheck() {
   }
 }
 
-export function formSubmit(event) {
+export function handleFormSubmit(event) {
   event.preventDefault();
-  const form = refs.form;
+  const form = event.currentTarget;
   const isMsgFilled = msgCheck();
   const isEmailValid = emailCheck();
+
+  localStorage.removeItem(STORAGE_KEY);
 
   if (!isEmailValid) {
     if (refs.emailInput.value === '') {
@@ -151,7 +158,57 @@ export function formSubmit(event) {
     }, 5000);
   }
 
+  if (!isMsgFilled || !isEmailValid) return;
+
+  const savedLSData = localStorage.getItem(STORAGE_KEY);
+  if (savedLSData) {
+    try {
+      const dataFromLS = JSON.parse(savedLSData);
+      console.log('Submitted data:', dataFromLS);
+    } catch (error) {
+      console.log('Submitted data: <invalid JSON>');
+    }
+  } else {
+    console.log('Please, fill all fields');
+  }
+
   form.reset();
+}
+
+export function handleFormInput(event) {
+  const form = event.currentTarget;
+  const formData = new FormData(form);
+  const filteredData = Array.from(formData.entries()).filter(
+    ([_, value]) => value && value.trim() !== ''
+  );
+
+  if (filteredData.length > 0) {
+    const formDataObj = Object.fromEntries(filteredData);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(formDataObj));
+  } else {
+    localStorage.removeItem(STORAGE_KEY);
+  }
+}
+
+export function populateForm() {
+  const savedLSData = localStorage.getItem(STORAGE_KEY);
+
+  if (!savedLSData) return;
+
+  try {
+    const dataFromLS = JSON.parse(savedLSData);
+    Object.keys(dataFromLS).forEach(field => {
+      if (
+        form.elements[field] &&
+        dataFromLS[field] !== undefined &&
+        dataFromLS[field] !== ''
+      ) {
+        form.elements[field].value = dataFromLS[field];
+      }
+    });
+  } catch (error) {
+    alert('Ooops... something went wrong');
+  }
 }
 
 function waitForElement(selector, parent, callback) {
