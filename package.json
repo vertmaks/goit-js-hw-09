@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --open",
-    "build": "vite build --base=/goit-js-hw-09",
+    "build": "vite build --base=/goit-js-hw-09/",
     "preview": "vite preview --open"
   },
   "repository": {
