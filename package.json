@@ -5,6 +5,7 @@
   "description": "JS-HW-09 - code modularity",
   "type": "module",
   "main": "src/main.js",
+  "base": "goit-js-hw-09",
   "scripts": {
     "test": "node js/main.js",
     "dev": "vite --open",
