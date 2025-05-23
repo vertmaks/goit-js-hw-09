@@ -4,9 +4,7 @@
   "version": "0.9.1",
   "description": "JS-HW-09 - code modularity",
   "type": "module",
-  "main": "src/main.js",
   "scripts": {
-    "test": "node js/main.js",
     "dev": "vite --open",
     "build": "vite build --base=/goit-js-hw-09",
     "preview": "vite preview --open"
